@@ -7,12 +7,12 @@
 <ion-content>
 
   <img [src]="cameraPreview" />
-  <ion-button class="button-full" (click)="takePicWithCamera()"></ion-button>
+  <ion-button class="button-round" (click)="takePicWithCamera()"> <ion-icon name="camera"></ion-icon></ion-button>
   <ion-item>
-    <ion-input [(ngModel)]="title"></ion-input>
+    <ion-input [(ngModel)]="title" placeholder="title"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-input [(ngModel)]="description"></ion-input>
+    <ion-input [(ngModel)]="description" placeholder="Information"></ion-input>
   </ion-item>
   <ion-button class="button-full" (click)="addRoom()" routerLink="/"> Add new room </ion-button>
 

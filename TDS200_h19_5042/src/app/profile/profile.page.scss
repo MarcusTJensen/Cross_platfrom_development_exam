@@ -1,6 +1,30 @@
 .avatar {
-    width: 30pt;
-    height: 30pt;
+    width: 50pt;
+    height: 50pt;
     border-radius: 100pt;
-    left: 50%;
+    margin-left: 38%;
+}
+
+.profileCard {
+    margin-top: 25%;
+    width: 80%;
+    height: 58%;
+    align-content: center;
+    padding-top: 10%;
+    margin-left: 10%;
+    border-radius: 10%;
+    text-align: center;
+    border: 2px solid grey;
+}
+
+#editProfile {
+    margin-top: 15%;
+}
+
+#logout {
+    margin-top: 15%;
+}
+
+.owner {
+    margin-top: 15%;
 }

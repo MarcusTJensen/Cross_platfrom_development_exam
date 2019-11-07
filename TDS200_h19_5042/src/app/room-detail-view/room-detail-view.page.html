@@ -1,13 +1,24 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>roomDetailView</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
- <img [src]="room.imgUrl" />
-  <ion-label>{{room.title}}</ion-label>
-  <ion-label>{{room.description}}</ion-label>
-  <ion-label>{{room.owner}}</ion-label>
+ <img [src]="imgUrl" />
+ <ion-row>
+  <ion-label>{{title}}</ion-label>
+</ion-row>
+<ion-row>
+  <ion-label>{{description}}</ion-label>
+</ion-row>
+<ion-row>
+  <ion-label>{{owner}}</ion-label>
+</ion-row>
 
 </ion-content>
+
+<app-tabbar></app-tabbar>

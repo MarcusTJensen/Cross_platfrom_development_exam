@@ -13,6 +13,10 @@ export class RoomDetailViewPage implements OnInit {
 
   roomId: string;
   room: Observable<RoomStruct>;
+  title: string;
+  owner: string;
+  description: string;
+  imgUrl: string;
   constructor(private route: ActivatedRoute, private router: Router, private storageService: StorageService) {
     this.route.params.subscribe((parameters) => { 
       this.roomId = parameters["rId"];
@@ -23,7 +27,13 @@ export class RoomDetailViewPage implements OnInit {
 
   ngOnInit() {
     this.room = this.storageService.retrieveFromDataBase(this.roomId);
-    console.log(this.room)
+    this.room.subscribe((r) => {
+      console.log(r.title);
+      this.owner = r.owner;
+      this.title = r.title;
+      this.description = r.description;
+      this.imgUrl = r.imgUrl;
+    });
   }
 
 }
