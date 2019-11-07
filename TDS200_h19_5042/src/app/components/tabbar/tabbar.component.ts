@@ -19,6 +19,7 @@ export class TabbarComponent implements OnInit {
 
   navigateToProfilePage() {
     this.router.navigate(['profile']);
+    document.getElementById("profile");
   }
   
   navigateToNewRoomPage() {

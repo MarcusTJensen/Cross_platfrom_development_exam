@@ -1,12 +1,12 @@
 <ion-footer>
   <ion-tab-bar slot="bottom">
-    <ion-tab-button (click)="navigateToHomePage()">
+    <ion-tab-button id="home" (click)="navigateToHomePage()">
       <ion-icon name="home" routerLink="/"></ion-icon>
     </ion-tab-button>
-    <ion-tab-button (click)="navigateToNewRoomPage()">
+    <ion-tab-button id="addRoom" (click)="navigateToNewRoomPage()">
       <ion-icon name="add"></ion-icon>
     </ion-tab-button>
-    <ion-tab-button (click)="navigateToProfilePage()">
+    <ion-tab-button id="profile" (click)="navigateToProfilePage()">
       <ion-icon name="person"></ion-icon>
     </ion-tab-button>
   </ion-tab-bar>
