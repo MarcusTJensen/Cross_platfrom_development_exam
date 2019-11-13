@@ -22,9 +22,15 @@ export class StorageService {
     
   }
 
-  retrieveFromDataBase(roomId: string) {
+  retrieveFromDataBaseRoom(roomId: string) {
     const room = this.firestore.collection("rooms").doc(roomId);
     const roomParsed = room.valueChanges() as Observable<RoomStruct>;
     return roomParsed
+  }
+
+  retrieveFromDataBaseUser(userId: string) {
+    const room = this.firestore.collection("users").doc(userId);
+    const userParsed = room.valueChanges() as Observable<userStruct>;
+    return userParsed
   }
 }

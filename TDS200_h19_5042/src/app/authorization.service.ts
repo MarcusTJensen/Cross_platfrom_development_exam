@@ -33,6 +33,11 @@ export class AuthorizationService {
   }
 
   isLoggedIn() {
-    return this.fireAuth.auth.currentUser;
-  }
+    let currentUser = this.fireAuth.auth.currentUser;
+    if(currentUser != null) {
+      return currentUser;
+    } else {
+      console.log("sorry bro");
+    }
+}
 }

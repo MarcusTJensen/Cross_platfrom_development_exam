@@ -93,13 +93,13 @@ export class NewRoomPage implements OnInit {
           text: 'login',
           handler: data => {
             this.authService.loginUser({username: data.email, password: data.password});
-            this.router.navigate(['/new-room']);
+            this.router.navigate(['new-room']);
           }
         },
         {
           text: 'register',
           handler: () => {
-            this.authService.registerUser({username: this.username, password: this.pass});
+            this.router.navigate(['register']);
           }
         }
       ]

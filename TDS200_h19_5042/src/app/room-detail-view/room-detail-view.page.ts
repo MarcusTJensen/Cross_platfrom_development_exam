@@ -26,7 +26,7 @@ export class RoomDetailViewPage implements OnInit {
   }
 
   ngOnInit() {
-    this.room = this.storageService.retrieveFromDataBase(this.roomId);
+    this.room = this.storageService.retrieveFromDataBaseRoom(this.roomId);
     this.room.subscribe((r) => {
       console.log(r.title);
       this.owner = r.owner;

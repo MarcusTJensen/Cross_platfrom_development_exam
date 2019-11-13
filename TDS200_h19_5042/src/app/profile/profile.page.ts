@@ -23,4 +23,9 @@ export class ProfilePage implements OnInit {
     this.router.navigate(['home']);
   }
 
+  printStuff(){
+    let id = this.authService.isLoggedIn().uid;
+    console.log(id);
+  }
+
 }
