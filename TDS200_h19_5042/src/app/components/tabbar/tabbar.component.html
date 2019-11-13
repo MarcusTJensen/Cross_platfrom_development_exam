@@ -4,7 +4,11 @@
       <ion-icon name="home" routerLink="/"></ion-icon>
     </ion-tab-button>
     <ion-tab-button id="addRoom" (click)="navigateToNewRoomPage()">
-      <ion-icon name="add"></ion-icon>
+      <ion-icon name="add" *ngIf="isCompany; else elseBlock"></ion-icon>
+      <ng-template #elseBlock><ion-icon name="briefcase"></ion-icon></ng-template>
+    </ion-tab-button>
+    <ion-tab-button *ngIf="isCompany">
+      <ion-icon name="briefcase"></ion-icon>
     </ion-tab-button>
     <ion-tab-button id="profile" (click)="navigateToProfilePage()">
       <ion-icon name="person"></ion-icon>

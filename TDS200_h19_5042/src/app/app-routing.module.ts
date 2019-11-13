@@ -10,10 +10,10 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule',
           ...canActivate(redirectLoggedInTo(['profile'])) },
   { path: 'room-detail-view/:rId', loadChildren: './room-detail-view/room-detail-view.module#RoomDetailViewPageModule' },
-  { path: 'new-room', loadChildren: './new-room/new-room.module#NewRoomPageModule',
-          ...canActivate(redirectUnauthorizedTo(['login'])) },
+  { path: 'new-room', loadChildren: './new-room/new-room.module#NewRoomPageModule' },
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule',
-          ...canActivate(redirectUnauthorizedTo(['login'])) }
+          ...canActivate(redirectUnauthorizedTo(['login'])) },
+  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' }
 ];
 
 /*const routes: Routes = [

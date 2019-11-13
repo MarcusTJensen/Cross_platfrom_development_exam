@@ -11,7 +11,10 @@ export class TabbarComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  ngOnInit() {}
+  isCompany: boolean;
+  ngOnInit() {
+    this.isCompany = true;
+  }
 
   printSumt() {
     console.log();

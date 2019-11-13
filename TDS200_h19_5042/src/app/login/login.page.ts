@@ -24,7 +24,6 @@ export class LoginPage implements OnInit {
   }
 
   async registerUser() {
-      await this.authService.registerUser({username: this.username, password: this.password});
-      this.router.navigate(['profile']);
+      this.router.navigate(['register']);
   }
 }

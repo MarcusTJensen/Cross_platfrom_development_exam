@@ -31,4 +31,8 @@ export class AuthorizationService {
   getUser() {
     return this.fireAuth.auth.currentUser.email;
   }
+
+  isLoggedIn() {
+    return this.fireAuth.auth.currentUser;
+  }
 }

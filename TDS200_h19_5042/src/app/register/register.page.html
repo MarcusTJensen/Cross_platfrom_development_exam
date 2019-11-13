@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>register</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-input type="email" placeholder="username" [(ngModel)]="username"></ion-input>
+      <ion-input type="password" placeholder="password" [(ngModel)]="password"></ion-input>
+      <ion-input type="text" placeholder="company" [(ngModel)]="company"></ion-input>
+      <ion-button (click)="register()">Register</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<app-tabbar></app-tabbar>

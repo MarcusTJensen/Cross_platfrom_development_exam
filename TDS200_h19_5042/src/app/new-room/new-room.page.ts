@@ -7,6 +7,7 @@ import { AuthorizationService } from '../authorization.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { uuid } from 'uuid';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-room',
@@ -21,13 +22,20 @@ export class NewRoomPage implements OnInit {
   title: string;
   description: string;
   imgUrl: string;
+  address: string;
   constructor(private camera: Camera, private geolocation: Geolocation, 
               private storageService: StorageService, private authService: AuthorizationService,
-              private fireStorage: AngularFireStorage, private alertController: AlertController) { }
+              private fireStorage: AngularFireStorage, private alertController: AlertController,
+              private router: Router) { }
 
   ngOnInit() {
     this.title = "";
     this.description = "";
+
+    let user = this.authService.isLoggedIn();
+    if (!user) {
+      this.presentLoginPrompt();
+    }
   }
 
   async takePicWithCamera(){
@@ -44,8 +52,9 @@ export class NewRoomPage implements OnInit {
     const user = this.authService.getUser();
     console.log(user);
     this.imgUrl = await this.addPicToFirebase();
-    const data: RoomStruct = {title: this.title, owner: user, description: this.description, imgUrl: this.imgUrl};
-    this.storageService.addToDataBase(data);
+    const data: RoomStruct = {title: this.title, owner: user, description: this.description, 
+                              imgUrl: this.imgUrl, address: this.address};
+    this.storageService.addToDataBaseRoom(data);
     console.log(data.title);
   }
 
@@ -57,25 +66,34 @@ export class NewRoomPage implements OnInit {
     return firestorageFileRef.getDownloadURL().toPromise();
   }
 
-  checkLoginStatus() {
-    let isloggedIn = this.authService.getUser();
-    if(isloggedIn === "") {
-      this.presentLoginPrompt();
-    }
-  }
-
   async presentLoginPrompt() {
     let alert = this.alertController.create({
-      message: 'You have to log in to add a room!',
+      message: "You're not logged in",
+      subHeader: 'You have to log in to add a room!',
+      inputs: [
+        {
+          name: "email",
+          placeholder: "email"
+        },
+        {
+          name: "password",
+          placeholder: "password",
+          type: "password"
+        }
+      ],
       buttons: [ 
         {
           text: 'cancel',
-          role: 'cancel'
+          role: 'cancel',
+          handler: () => {
+            this.router.navigate(['/']);
+          }
         },
         {
           text: 'login',
-          handler: () => {
-            this.authService.loginUser({username: this.username, password: this.pass});
+          handler: data => {
+            this.authService.loginUser({username: data.email, password: data.password});
+            this.router.navigate(['/new-room']);
           }
         },
         {
@@ -86,7 +104,7 @@ export class NewRoomPage implements OnInit {
         }
       ]
     });
-    (await alert).present()
+    return (await alert).present();
   }
 
 }

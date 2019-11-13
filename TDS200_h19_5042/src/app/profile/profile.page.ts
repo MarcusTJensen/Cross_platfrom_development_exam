@@ -20,7 +20,7 @@ export class ProfilePage implements OnInit {
 
   async logoutUser() {
     await this.authService.logoutUser()
-    this.router.navigate(['home'])
+    this.router.navigate(['home']);
   }
 
 }

@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import RoomStruct from './models/roomStruct';
 import { Observable } from 'rxjs';
+import userStruct from './models/userStruct';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,14 @@ export class StorageService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  addToDataBase(newRoom: RoomStruct) {
+  addToDataBaseRoom(newRoom: RoomStruct) {
     const db = this.firestore.collection("rooms");
     db.add(newRoom);
+  }
+  addToDatabaseUser(newUser: userStruct, uid: string) {
+    const db = this.firestore.collection("users");
+    db.doc(uid).set(newUser);
+    
   }
 
   retrieveFromDataBase(roomId: string) {

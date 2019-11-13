@@ -2,5 +2,6 @@ export default interface RoomStruct {
     title: string,
     description: string,
     owner: string,
-    imgUrl: string
+    imgUrl: string,
+    address: string
 }
