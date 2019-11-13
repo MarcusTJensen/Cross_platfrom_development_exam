@@ -31,7 +31,6 @@ export class RegisterPage implements OnInit {
     this.authService.loginUser({username: this.username, password: this.password});
     let data: userStruct = {email: this.username, company: this.company};
     let uid = this.authService.isLoggedIn().uid;
-    console.log(uid);
     this.storageService.addToDatabaseUser(data, uid);
     this.router.navigate(['profile']);
   }
