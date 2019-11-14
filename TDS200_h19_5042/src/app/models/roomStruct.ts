@@ -4,4 +4,5 @@ export default interface RoomStruct {
     owner: string,
     imgUrl: string,
     address: string
+    isAvailable: boolean
 }

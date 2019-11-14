@@ -7,7 +7,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let room of rooms$ | async" lines="none" (click)="goToDetailView(room.id)">
+    <ion-card *ngFor="let room of rooms$ | async" lines="none" (click)="goToDetailView(room.id)">
+    <div *ngIf="room.isAvailable">
     <img [src]="room.imgUrl" />
     <ion-card-header>
       <h1 class="title">{{room.title}}</h1>
@@ -23,6 +24,7 @@
         </ion-col>
       </ion-row>
     </ion-card-content>
+    </div>
   </ion-card>
 </ion-content>
 

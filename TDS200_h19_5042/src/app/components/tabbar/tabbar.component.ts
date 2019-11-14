@@ -17,14 +17,14 @@ export class TabbarComponent implements OnInit {
   company: string;
   isCompany: boolean;
   ngOnInit() {
-    this.checkCompany();
+    this.isCompany = true;
   }
   async checkCompany(){
     let currentUser = await this.authService.isLoggedIn();
     if(currentUser != null){ 
       let currentUserId = currentUser.uid;
-    let userData = this.storageService.retrieveFromDataBaseUser(currentUserId);
-    userData.subscribe((u) => {
+      let userData = this.storageService.retrieveFromDataBaseUser(currentUserId);
+      userData.subscribe((u) => {
       if(u.company != "" || u.company != null) {
         this.isCompany = true;
       }

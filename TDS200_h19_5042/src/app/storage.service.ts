@@ -33,4 +33,15 @@ export class StorageService {
     const userParsed = room.valueChanges() as Observable<userStruct>;
     return userParsed
   }
+
+  updateDatabaseRoom(roomId: string, updatedRoom: RoomStruct) {
+    const room = this.firestore.collection('rooms').doc(roomId);
+    //console.log(updatedRoom.address);
+    room.update(updatedRoom);
+  }
+
+  updateDatabaseUser(uid: string, updatedUser: userStruct) {
+    const user = this.firestore.collection('users').doc(uid);
+    user.update(updatedUser);
+  }
 }

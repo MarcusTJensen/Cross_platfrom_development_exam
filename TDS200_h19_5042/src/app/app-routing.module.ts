@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'new-room', loadChildren: './new-room/new-room.module#NewRoomPageModule' },
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule',
           ...canActivate(redirectUnauthorizedTo(['login'])) },
-  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' }
+  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
+  { path: 'bookings', loadChildren: './bookings/bookings.module#BookingsPageModule' }
 ];
 
 /*const routes: Routes = [

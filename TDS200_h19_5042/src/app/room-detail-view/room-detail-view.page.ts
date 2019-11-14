@@ -3,6 +3,8 @@ import RoomStruct from '../models/roomStruct';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { Observable } from 'rxjs';
+import { AuthorizationService } from '../authorization.service';
+import userStruct from '../models/userStruct';
 
 @Component({
   selector: 'app-room-detail-view',
@@ -17,7 +19,12 @@ export class RoomDetailViewPage implements OnInit {
   owner: string;
   description: string;
   imgUrl: string;
-  constructor(private route: ActivatedRoute, private router: Router, private storageService: StorageService) {
+  address: string;
+  updatedRoom: RoomStruct;
+  activeUser: userStruct;
+  uid: string;
+  constructor(private route: ActivatedRoute, private router: Router, private storageService: StorageService,
+              private authService: AuthorizationService) {
     this.route.params.subscribe((parameters) => { 
       this.roomId = parameters["rId"];
       console.log(parameters);
@@ -33,7 +40,28 @@ export class RoomDetailViewPage implements OnInit {
       this.title = r.title;
       this.description = r.description;
       this.imgUrl = r.imgUrl;
+      this.address = r.address;
+      this.updatedRoom = r;
     });
+    this.uid = this.authService.isLoggedIn().uid;
+    const user = this.storageService.retrieveFromDataBaseUser(this.uid);
+    user.subscribe((u) => {
+      this.activeUser = u;
+    });
+  }
+
+  bookRoom() {
+    
+    console.log(this.updatedRoom);
+    console.log("yallah", this.updatedRoom.title);
+    this.updatedRoom.isAvailable = false;
+
+    const bookings = this.updatedRoom;
+    this.activeUser.bookings.push(this.updatedRoom);
+    this.activeUser.bookings = [this.updatedRoom];
+    this.storageService.updateDatabaseRoom(this.roomId, this.updatedRoom);
+    this.storageService.updateDatabaseUser(this.uid, this.activeUser);
+    console.log(this.activeUser.company);
   }
 
 }

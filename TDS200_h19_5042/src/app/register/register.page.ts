@@ -3,6 +3,7 @@ import { AuthorizationService } from '../authorization.service';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import userStruct from '../models/userStruct';
+import RoomStruct from '../models/roomStruct';
 
 @Component({
   selector: 'app-register',
@@ -29,6 +30,7 @@ export class RegisterPage implements OnInit {
     async addUserToDb() {
     let createdUser = await this.register();
     this.authService.loginUser({username: this.username, password: this.password});
+    let aRoom: RoomStruct = {title: "ja", description: "okokokok", imgUrl: "nei", owner: "me", address: "to da left", isAvailable: false};
     let data: userStruct = {email: this.username, company: this.company};
     let uid = this.authService.isLoggedIn().uid;
     this.storageService.addToDatabaseUser(data, uid);
