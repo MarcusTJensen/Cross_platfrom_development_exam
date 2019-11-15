@@ -6,4 +6,12 @@
 
 <ion-content>
 
+  <ion-row *ngFor="let room of myBookings$" class="rowPadding" (click)="goToDetailView(room.id)">
+    <img col-0 class="bookingsImg" [src]="room.imgUrl" />
+    <ion-label col-2 class="address"> {{room.address}} </ion-label>
+    <ion-icon col-12 name="arrow-dropright" class="arrowIcon"></ion-icon>
+  </ion-row>
+
 </ion-content>
+
+<app-tabbar></app-tabbar>

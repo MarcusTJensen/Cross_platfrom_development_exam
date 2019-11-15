@@ -4,7 +4,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import RoomStruct from '../models/roomStruct';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { NetworkInterfaceInfoIPv4 } from 'os';
 
 @Component({
   selector: 'app-home',

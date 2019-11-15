@@ -49,4 +49,8 @@ export class TabbarComponent implements OnInit {
     this.router.navigate(['home']);
   }
 
+  navigateToBookings() {
+    this.router.navigate(['bookings']);
+  }
+
 }

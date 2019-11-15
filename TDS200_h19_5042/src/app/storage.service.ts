@@ -34,6 +34,11 @@ export class StorageService {
     return userParsed
   }
 
+  getUserData() {
+    const room = this.firestore.collection("users");
+    return room;
+  }
+
   updateDatabaseRoom(roomId: string, updatedRoom: RoomStruct) {
     const room = this.firestore.collection('rooms').doc(roomId);
     //console.log(updatedRoom.address);

@@ -54,11 +54,11 @@ export class RoomDetailViewPage implements OnInit {
     
     console.log(this.updatedRoom);
     console.log("yallah", this.updatedRoom.title);
+    console.log(this.activeUser.bookings);
     this.updatedRoom.isAvailable = false;
 
     const bookings = this.updatedRoom;
     this.activeUser.bookings.push(this.updatedRoom);
-    this.activeUser.bookings = [this.updatedRoom];
     this.storageService.updateDatabaseRoom(this.roomId, this.updatedRoom);
     this.storageService.updateDatabaseUser(this.uid, this.activeUser);
     console.log(this.activeUser.company);
