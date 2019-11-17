@@ -14,9 +14,12 @@
   <ion-item>
     <ion-input [(ngModel)]="description" placeholder="Information"></ion-input>
   </ion-item>
-  <ion-item>
-    <ion-input [(ngModel)]="address" placeholder="address"></ion-input>
-  </ion-item>
+  <ion-searchbar [(ngModel)]="address" placeholder="address" (ionChange)="onInputChange()"></ion-searchbar>
+  <ion-card *ngIf="inputText">
+    <ion-card-content>
+      <ion-label>yo waddup</ion-label>
+    </ion-card-content>
+  </ion-card>
   <ion-button class="button-full" (click)="addRoom()" routerLink="/"> Add new room </ion-button>
 
 </ion-content>

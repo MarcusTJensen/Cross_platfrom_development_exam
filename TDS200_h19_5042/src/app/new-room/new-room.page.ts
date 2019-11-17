@@ -8,6 +8,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { uuid } from 'uuid';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { google } from 'googleapis';
 
 @Component({
   selector: 'app-new-room',
@@ -23,6 +24,8 @@ export class NewRoomPage implements OnInit {
   description: string;
   imgUrl: string;
   address: string;
+  inputText: boolean;
+  searchResult: [];
   constructor(private camera: Camera, private geolocation: Geolocation, 
               private storageService: StorageService, private authService: AuthorizationService,
               private fireStorage: AngularFireStorage, private alertController: AlertController,
@@ -36,6 +39,7 @@ export class NewRoomPage implements OnInit {
     if (!user) {
       this.presentLoginPrompt();
     }
+    this.inputText = true;
   }
 
   async takePicWithCamera(){
@@ -105,6 +109,21 @@ export class NewRoomPage implements OnInit {
       ]
     });
     return (await alert).present();
+  }
+
+  async onInputChange() {
+    /*let placesSearch =*/ 
+    await fetch(
+      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Paris&types=geocode&key=AIzaSyAsc6op7LCc15rJbzUy7vbHc9OuXiRZQSE`,
+      {mode: 'no-cors'}
+      ).then((r) => {
+          console.log(r.json());
+      });
+      /*"https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&"
+
+      var service = new google.maps.places.PlacesService();
+
+      service.findplacefromtext*/
   }
 
 }
