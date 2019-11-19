@@ -56,12 +56,15 @@ export class RoomDetailViewPage implements OnInit {
     console.log("yallah", this.updatedRoom.title);
     console.log(this.activeUser.bookings);
     this.updatedRoom.isAvailable = false;
-
-    const bookings = this.updatedRoom;
+    this.updatedRoom.rId = this.roomId;
     this.activeUser.bookings.push(this.updatedRoom);
     this.storageService.updateDatabaseRoom(this.roomId, this.updatedRoom);
     this.storageService.updateDatabaseUser(this.uid, this.activeUser);
     console.log(this.activeUser.company);
+  }
+
+  openMapWithDirections() {
+    this.router.navigate(['map']);
   }
 
 }

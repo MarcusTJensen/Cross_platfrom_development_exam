@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AgmCoreModule } from '@agm/core';
 import { HomePage } from './home/home.page';
 import { HomePageModule } from './home/home.module';
 import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from'@angular/fire/auth-guard';
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule',
           ...canActivate(redirectUnauthorizedTo(['login'])) },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
-  { path: 'bookings', loadChildren: './bookings/bookings.module#BookingsPageModule' }
+  { path: 'bookings', loadChildren: './bookings/bookings.module#BookingsPageModule' },
+  { path: 'map', loadChildren: './map/map.module#MapPageModule' }
 ];
 
 /*const routes: Routes = [

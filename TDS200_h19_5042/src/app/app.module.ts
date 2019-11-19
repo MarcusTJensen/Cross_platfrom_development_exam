@@ -6,6 +6,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -39,7 +41,12 @@ var firebaseConfig = {
     AngularFirestoreModule,
     AngularFireAuthGuardModule,
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD03B7fr-Lz0Cs_IqgpWBYe4aivxqImpss',
+      libraries: ["places"]
+    }),
+    AgmDirectionModule
   ],
   providers: [
     StatusBar,

@@ -18,6 +18,12 @@
 <ion-row>
   <ion-label>{{owner}}</ion-label>
 </ion-row>
+<ion-row>
+    <ion-label>{{address}}</ion-label>
+    <ion-button (click) ="openMapWithDirections()">
+      <img src='https://cdn0.iconfinder.com/data/icons/maps-15/24/directions-512.png' class="directions" />
+    </ion-button>
+</ion-row>
 <ion-button (click)="bookRoom()" class="button-full">Book Room</ion-button>
 
 </ion-content>

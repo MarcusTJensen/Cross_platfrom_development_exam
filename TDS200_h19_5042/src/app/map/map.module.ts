@@ -5,14 +5,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RoomDetailViewPage } from './room-detail-view.page';
-import { ComponentsModule } from '../components/components.module';
+import { MapPage } from './map.page';
 import { AgmCoreModule } from '@agm/core';
+import { ComponentsModule } from '../components/components.module';
+import { AgmDirectionModule } from 'agm-direction';
 
 const routes: Routes = [
   {
     path: '',
-    component: RoomDetailViewPage
+    component: MapPage
   }
 ];
 
@@ -21,10 +22,11 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    ComponentsModule,
     AgmCoreModule,
-    RouterModule.forChild(routes)
+    ComponentsModule,
+    RouterModule.forChild(routes),
+    AgmDirectionModule
   ],
-  declarations: [RoomDetailViewPage]
+  declarations: [MapPage]
 })
-export class RoomDetailViewPageModule {}
+export class MapPageModule {}

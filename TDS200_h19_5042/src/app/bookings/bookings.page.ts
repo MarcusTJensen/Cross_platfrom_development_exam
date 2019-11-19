@@ -4,6 +4,7 @@ import { AuthorizationService } from '../authorization.service';
 import { Observable } from 'rxjs';
 import RoomStruct from '../models/roomStruct';
 import userStruct from '../models/userStruct';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bookings',
@@ -13,7 +14,7 @@ import userStruct from '../models/userStruct';
 export class BookingsPage implements OnInit {
 
   private myBookings$: Observable<RoomStruct[]>;
-  constructor(private storageService: StorageService, private authService: AuthorizationService) { }
+  constructor(private storageService: StorageService, private authService: AuthorizationService, private router: Router) { }
 
   ngOnInit() {
 
@@ -29,6 +30,11 @@ export class BookingsPage implements OnInit {
       console.log(u.bookings);
       return(this.myBookings$);
     })
+  }
+
+  goToDetailView(rId: string) {
+    console.log(rId);
+    this.router.navigate(["room-detail-view/" + rId]);
   }
 
 }

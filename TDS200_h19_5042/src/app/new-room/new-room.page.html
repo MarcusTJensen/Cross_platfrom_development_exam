@@ -14,14 +14,21 @@
   <ion-item>
     <ion-input [(ngModel)]="description" placeholder="Information"></ion-input>
   </ion-item>
-  <ion-searchbar [(ngModel)]="address" placeholder="address" (ionChange)="onInputChange()"></ion-searchbar>
+  <ion-searchbar placeholder="address" [(ngModel)]="searchText" (ionChange)="onInputChange()"></ion-searchbar>
   <ion-card *ngIf="inputText">
     <ion-card-content>
-      <ion-label>yo waddup</ion-label>
+      <ion-item *ngFor="let address of searchResult$" (click)="setAddress(address.description)">
+        <ion-label>
+          {{address.description}}
+        </ion-label>
+      </ion-item>
     </ion-card-content>
   </ion-card>
+  <ion-item *ngIf="addressRegistered">
+    <ion-label>{{address}}</ion-label>
+  </ion-item>
   <ion-button class="button-full" (click)="addRoom()" routerLink="/"> Add new room </ion-button>
-
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyD2Dd26BWw91XcQBGDpspbETjGB6cc0qE8"></script>
 </ion-content>
 
 <app-tabbar></app-tabbar>

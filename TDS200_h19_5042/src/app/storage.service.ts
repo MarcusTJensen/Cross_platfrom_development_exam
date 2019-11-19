@@ -28,6 +28,13 @@ export class StorageService {
     return roomParsed
   }
 
+  setRoomId(rId: string, id: string) {
+    const room = this.firestore.collection("rooms").doc(rId);
+    const roomParsed = room as unknown as RoomStruct;
+    roomParsed.rId = id;
+    room.update(roomParsed);
+  }
+
   retrieveFromDataBaseUser(userId: string) {
     const room = this.firestore.collection("users").doc(userId);
     const userParsed = room.valueChanges() as Observable<userStruct>;

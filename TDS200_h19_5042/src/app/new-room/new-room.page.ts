@@ -8,7 +8,9 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { uuid } from 'uuid';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { google } from 'googleapis';
+import { MapsAPILoader } from '@agm/core';
+import { Observable } from 'rxjs';
+import PlacesStruct from '../models/placesStruct';
 
 @Component({
   selector: 'app-new-room',
@@ -17,6 +19,7 @@ import { google } from 'googleapis';
 })
 export class NewRoomPage implements OnInit {
 
+  addressRegistered: boolean;
   username: string;
   pass: string;
   cameraPreview: string;
@@ -25,11 +28,18 @@ export class NewRoomPage implements OnInit {
   imgUrl: string;
   address: string;
   inputText: boolean;
-  searchResult: [];
+  searchText: string;
+  searchResult$: Observable<PlacesStruct[]>;
+  private autoComplete;
   constructor(private camera: Camera, private geolocation: Geolocation, 
               private storageService: StorageService, private authService: AuthorizationService,
               private fireStorage: AngularFireStorage, private alertController: AlertController,
-              private router: Router) { }
+              private router: Router, private mapsApiLoader: MapsAPILoader) { 
+
+                mapsApiLoader.load().then(() => {
+                  this.autoComplete = new google.maps.places.AutocompleteService();
+                })
+              }
 
   ngOnInit() {
     this.title = "";
@@ -39,7 +49,7 @@ export class NewRoomPage implements OnInit {
     if (!user) {
       this.presentLoginPrompt();
     }
-    this.inputText = true;
+    //this.inputText = true;
   }
 
   async takePicWithCamera(){
@@ -57,7 +67,7 @@ export class NewRoomPage implements OnInit {
     console.log(user);
     this.imgUrl = await this.addPicToFirebase();
     const data: RoomStruct = {title: this.title, owner: user, description: this.description, 
-                              imgUrl: this.imgUrl, address: this.address, isAvailable: true};
+                              imgUrl: this.imgUrl, address: this.address, isAvailable: true, rId: ""};
     this.storageService.addToDataBaseRoom(data);
     console.log(data.title);
   }
@@ -111,19 +121,41 @@ export class NewRoomPage implements OnInit {
     return (await alert).present();
   }
 
-  async onInputChange() {
-    /*let placesSearch =*/ 
+  /*async onInputChange() {
+    let placesSearch =
     await fetch(
-      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Paris&types=geocode&key=AIzaSyAsc6op7LCc15rJbzUy7vbHc9OuXiRZQSE`,
+      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${this.address}&types=geocode&key=AIzaSyD03B7fr-Lz0Cs_IqgpWBYe4aivxqImpss`,
       {mode: 'no-cors'}
-      ).then((r) => {
-          console.log(r.json());
-      });
-      /*"https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&"
+      );
+      "https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&"
 
       var service = new google.maps.places.PlacesService();
 
-      service.findplacefromtext*/
+      service.findplacefromtext
+      let resultParsed = placesSearch.json();
+
+      console.log(resultParsed);
+  }*/
+
+  async onInputChange() {
+    if(this.searchText.length) {
+      this.inputText = true;
+      let placesResponse = await this.autoComplete.getPlacePredictions({input: this.searchText}, (data) => {
+        console.log(data);
+        this.searchResult$ = data;
+      });
+    } else {
+      this.inputText = false;
+      this.setAddress(this.address);
+    }
+  }
+
+  setAddress(clickedAddress: string){
+    this.searchText = "";
+    this.addressRegistered = true;
+    this.address = clickedAddress;
+    this.inputText = false;
+    console.log(this.autoComplete.getPlace());
   }
 
 }

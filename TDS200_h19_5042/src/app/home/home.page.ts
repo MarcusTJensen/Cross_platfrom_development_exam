@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import RoomStruct from '../models/roomStruct';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { StorageService } from '../storage.service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ export class HomePage {
 
   private rooms$: Observable<RoomStruct[]>;
 
-  constructor(private firestore: AngularFirestore, private router: Router) {}
+  constructor(private firestore: AngularFirestore, private router: Router,
+              private storageService: StorageService) {}
 
   ngOnInit() {
     this.rooms$ = this.firestore.collection("rooms").snapshotChanges().pipe(
@@ -29,7 +31,7 @@ export class HomePage {
     
   }
 
-  goToDetailView(id: string) {
+  async goToDetailView(id: string) {
     console.log(id);
     this.router.navigate(["room-detail-view/" + id]);
   }
