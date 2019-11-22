@@ -8,6 +8,7 @@ import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
+import { IonicRatingModule } from 'ionic4-rating';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -42,6 +43,7 @@ var firebaseConfig = {
     AngularFireAuthGuardModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
+    IonicRatingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD03B7fr-Lz0Cs_IqgpWBYe4aivxqImpss',
       libraries: ["places"]

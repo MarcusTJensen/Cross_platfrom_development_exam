@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { RoomDetailViewPage } from './room-detail-view.page';
 import { ComponentsModule } from '../components/components.module';
 import { AgmCoreModule } from '@agm/core';
+import { IonicRatingModule } from 'ionic4-rating';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
     IonicModule,
     ComponentsModule,
     AgmCoreModule,
+    IonicRatingModule,
     RouterModule.forChild(routes)
   ],
   declarations: [RoomDetailViewPage]

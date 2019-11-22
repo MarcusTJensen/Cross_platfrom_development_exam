@@ -1,16 +1,21 @@
 .bookingsImg {
-    width: 30%;
+    width: 100%;
     border-radius: 5%;
     margin-left: 2%;
     margin-bottom: 2%;
-    height: 10%;
     margin-top: 2%;
 }
 
 .rowPadding {
     margin-bottom: 5%;
     margin-top: 5%;
-    background-color: aqua;
+    background-color: #FC5B19;
+    border-radius: 15px;
+
+}
+
+ion-content {
+    --ion-background-color: #152A3E;
 }
 
 .itemPadding {
@@ -21,11 +26,27 @@
 .address {
     margin-top: 17%;
     margin-left: 5%;
+    font-size: smaller;
 }
 
 .arrowIcon {
     margin-right: 0;
     //margin-left: 24%;
-    margin-top: 10%;
+    //top: 25%;
     font-size: 150%;
+}
+
+.addressItem {
+    --background: aqua;
+    top: 25%;
+    height: 100%;
+}
+
+.lastItem {
+    --background: #FC5B19;
+    top: 25%;
+}
+
+.addressCol {
+    margin-top: 4%;
 }

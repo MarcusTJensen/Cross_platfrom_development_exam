@@ -16,7 +16,7 @@ const routes: Routes = [
           ...canActivate(redirectUnauthorizedTo(['login'])) },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'bookings', loadChildren: './bookings/bookings.module#BookingsPageModule' },
-  { path: 'map', loadChildren: './map/map.module#MapPageModule' }
+  { path: 'map/:rId', loadChildren: './map/map.module#MapPageModule' }
 ];
 
 /*const routes: Routes = [

@@ -5,12 +5,14 @@ import { StorageService } from '../storage.service';
 import RoomStruct from '../models/roomStruct';
 import { AuthorizationService } from '../authorization.service';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { uuid } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MapsAPILoader } from '@agm/core';
 import { Observable } from 'rxjs';
 import PlacesStruct from '../models/placesStruct';
+
+declare var google: any;
 
 @Component({
   selector: 'app-new-room',
@@ -67,13 +69,15 @@ export class NewRoomPage implements OnInit {
     console.log(user);
     this.imgUrl = await this.addPicToFirebase();
     const data: RoomStruct = {title: this.title, owner: user, description: this.description, 
-                              imgUrl: this.imgUrl, address: this.address, isAvailable: true, rId: ""};
+                              imgUrl: this.imgUrl, address: this.address, isAvailable: true, rId: "",
+                              ratings: [null]};
     this.storageService.addToDataBaseRoom(data);
     console.log(data.title);
   }
 
   async addPicToFirebase() {
-    const fileName = `tds200-${uuid}.png`;
+    const fileName = `tds200-${uuid()}.png`;
+    //const filenName = `tds200-${randNum}.png`;
     const firestorageFileRef = this.fireStorage.ref(fileName);
     const uploadTask = firestorageFileRef.putString(this.cameraPreview, 'base64', { contentType: 'image/png' });
     await uploadTask.then();
@@ -150,12 +154,11 @@ export class NewRoomPage implements OnInit {
     }
   }
 
-  setAddress(clickedAddress: string){
+  async setAddress(clickedAddress: string){
     this.searchText = "";
     this.addressRegistered = true;
     this.address = clickedAddress;
     this.inputText = false;
-    console.log(this.autoComplete.getPlace());
   }
 
 }
