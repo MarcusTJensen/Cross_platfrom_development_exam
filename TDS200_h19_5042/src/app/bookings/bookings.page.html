@@ -6,12 +6,13 @@
 
 <ion-content>
 
-  <ion-row *ngFor="let room of myBookings$" class="rowPadding" (click)="goToDetailView(room.rId)">
-    <ion-col size="5">
+  <!--<ion-grid>
+    <ng-container *ngFor="let room of myBookings$">
+  <ion-row class="rowPadding" (click)="goToDetailView(room.rId)">
+    <ion-col size="9">
+      <div class="imgContainer">
     <img class="bookingsImg" [src]="room.imgUrl" />
-  </ion-col>
-  <ion-col size="4" class="addressCol">
-    <ion-label class="address"> {{room.address}} </ion-label>
+    </div>
   </ion-col>
   <ion-col size="3">
     <ion-item class="lastItem" lines="none">
@@ -19,6 +20,30 @@
   </ion-item>
   </ion-col>
   </ion-row>
+  <ion-row class="addressRow">
+    <ion-col size="9">
+    <ion-label class="address"> {{room.address}} </ion-label>
+  </ion-col>
+  </ion-row>
+</ng-container>
+</ion-grid>-->
+
+<ion-grid>
+    <ion-card class="bookingsCard" *ngFor="let room of myBookings$" (click)="goToDetailView(room.rId)">
+        <div class="containerDiv">
+            <div class="imgCropDiv">
+              <img [src]="room.imgUrl" class="roomImg" />
+            </div>
+          </div>
+      <ion-card-content class="bookingsCardContent">
+        <div class="addressDiv">
+          <label class="address">{{room.address}}</label>
+          <img [src]="room.imgUrl" class="avatar">
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+</ion-grid>
 
 </ion-content>
 

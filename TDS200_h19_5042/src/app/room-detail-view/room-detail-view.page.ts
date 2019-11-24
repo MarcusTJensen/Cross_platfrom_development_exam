@@ -32,7 +32,7 @@ export class RoomDetailViewPage implements OnInit {
   isRating: boolean;
   private ratings;
   actualRatings$ = [];
-  ratingExists: boolean;
+  ratingExists: boolean = false;
   constructor(private route: ActivatedRoute, private router: Router, private storageService: StorageService,
               private authService: AuthorizationService) {
     this.route.params.subscribe((parameters) => { 
@@ -54,11 +54,21 @@ export class RoomDetailViewPage implements OnInit {
       this.updatedRoom = r;
       this.isAvailable = r.isAvailable;
       this.ratings = r.ratings;
-      if(r.ratings.length === 1 && r.ratings.includes(null)) {
+      console.log(r.ratings);
+      if(!r.ratings[0].comment){
         this.ratingExists = false;
       } else {
         this.ratingExists = true;
       }
+      /*if(r.ratings.length === 1 && r.ratings.includes(null)) {
+        this.ratingExists = false;
+        console.log(r.ratings);
+      } else if(r.ratings.includes({})) {
+        this.ratingExists = false;
+      } else {
+        this.ratingExists = true;
+        console.log(r.ratings);
+      }*/
     });
 
     console.log(this.ratings);
@@ -85,19 +95,19 @@ export class RoomDetailViewPage implements OnInit {
   }
 
   unBookRoom() {
-    if(this.activeUser.bookings.length <= 1) {
+    /*if(this.activeUser.bookings.length <= 1) {
       this.activeUser.bookings.pop();
-    } else {
+    } else {*/
         for (var i = 0; i < this.activeUser.bookings.length; i++) {
           console.log(this.updatedRoom);
           console.log(this.activeUser.bookings[i]);
-          if(this.activeUser.bookings[i] = this.updatedRoom) {
+          let activeRoom = this.activeUser.bookings[i] as RoomStruct;
+          if(activeRoom.address === this.updatedRoom.address) {
             console.log(this.updatedRoom);
             console.log(this.activeUser.bookings[i]);
             this.activeUser.bookings.splice(i, 1);
           }
         }
-    }
     this.updatedRoom.isAvailable = true;
     this.updatedRoom.rId = this.roomId;
     this.storageService.updateDatabaseRoom(this.roomId, this.updatedRoom);
@@ -120,19 +130,16 @@ export class RoomDetailViewPage implements OnInit {
     }*/
     let rating = {rating: this.ratingNum, comment: this.comment, writer: this.activeUser.email};
     for(var i = 0; i < this.activeUser.bookings.length; i++) {
-      if(this.activeUser.bookings[i] = this.updatedRoom) {
+      let activeRoom = this.activeUser.bookings[i] as RoomStruct;
+      if(activeRoom.rId === this.updatedRoom.rId) {
         this.activeUser.bookings.splice(i, 1);
-      }
-    }
-    for(var i = 0; i < this.ratings.length; i++) {
-      if(this.ratings[i].comment = "this room is not rated yet. Be the first!") {
-        this.ratings.splice(i, 1);
       }
     }
     this.updatedRoom.ratings.push(rating);
     this.activeUser.bookings.push(this.updatedRoom);
     this.storageService.updateDatabaseRoom(this.roomId, this.updatedRoom);
     this.storageService.updateDatabaseUser(this.uid, this.activeUser);
+    this.isRating = false;
   }
 
   openMapWithDirections() {

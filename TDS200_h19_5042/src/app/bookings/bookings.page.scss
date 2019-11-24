@@ -1,21 +1,21 @@
 .bookingsImg {
     width: 100%;
     border-radius: 5%;
-    margin-left: 2%;
     margin-bottom: 2%;
-    margin-top: 2%;
+    margin-top: -20%;
 }
 
 .rowPadding {
-    margin-bottom: 5%;
+    margin-bottom: 2%;
     margin-top: 5%;
-    background-color: #FC5B19;
+    background-color: #F8963F;
     border-radius: 15px;
+    height: 180px;
 
 }
 
 ion-content {
-    --ion-background-color: #152A3E;
+    --ion-background-color: #272727;
 }
 
 .itemPadding {
@@ -25,7 +25,6 @@ ion-content {
 
 .address {
     margin-top: 17%;
-    margin-left: 5%;
     font-size: smaller;
 }
 
@@ -43,10 +42,73 @@ ion-content {
 }
 
 .lastItem {
-    --background: #FC5B19;
+    --background: #F8963F;
     top: 25%;
 }
 
 .addressCol {
     margin-top: 4%;
+}
+
+.imgContainer {
+    overflow: hidden;
+    height: 100px;
+    border-radius: 10px;
+    padding: 0;
+    margin: 0;
+}
+
+.addressRow {
+    margin-top: -20%;
+    text-align: left;
+}
+
+.imgCropDiv {
+    overflow: hidden;
+    height: 80px;
+    width: 100%;
+    background-color: #F8963F;
+    text-align: center;
+}
+
+.roomImg {
+    max-width: 1000px;
+    width: 450px;
+    margin: 0;
+    display: flex;
+    margin: auto;
+    margin-top: -45%;
+    margin-left: -20%;
+    opacity: 0.5;
+}
+
+.bookingsCardContent {
+    padding-top: 0;
+    padding: 0;
+    text-align: center;
+    height: 100%;
+    background-color: rgba(248, 149, 63, 0);
+}
+
+.avatar {
+    width: 50pt;
+    height: 50pt;
+    border-radius: 100pt;
+    margin-top: -44%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #F8963F;
+}
+
+.bookingsCard {
+    height: 180px;
+    background-color: #F8963F;
+}
+
+.addressDiv {
+    margin-top: 19%;
+}
+
+.address {
+    color: #272727;
 }

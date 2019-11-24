@@ -43,35 +43,36 @@
 
 .detailViewRow {
     align-content: center;
-    background-color: #6C74E1;
 }
 
 .detailViewColumn {
     text-align: center;
-    padding-top: 5%;
-    padding-bottom: 5%;
+    //padding-top: 5%;
+    padding-bottom: 10%;
+    padding-left: 0;
 }
 
 .detailViewCardLabel {
-    color: #2b2b28;
+    color: #b9b9b9b7;
     padding-left: 5%;
     padding-top: 5%;
+    padding-bottom: 10%;
+    font-size: small;
 }
 
 .detailViewCardTitle {
     /*padding-top: 5%;
     padding-bottom: 5%;*/
-    color: black;
-    font-size: large;
-    font-style: italic;
+    color: white;
+    font-size: larger;
 }
 .detailViewIonContent {
-    --ion-background-color: #f1d6ab;
+    --ion-background-color: #272727;
     //margin-top: 10%;
 }
 
 .detailViewHeader {
-    --ion-background-color: #2b2b28;
+    --ion-background-color: #272727;
 }
 
 .detailViewPageTitle {
@@ -95,10 +96,15 @@
 }
 
 ion-content {
-    --ion-background-color: #152A3E;
+    --ion-background-color: #272727;
     //text-align: center;
     align-content: center;
     align-items: center;
+    text-align: center;
+}
+
+ion-icon {
+    color: #272727;
 }
 
 .roomCard {
@@ -111,19 +117,23 @@ ion-content {
 .detailViewImage {
     //border-radius: 25px;
     //border: 5px solid #6C74E1;
-    opacity: 0.5;
+    //opacity: 0.5;
+    z-index: 1;
+    width: 100%;
 }
 
 .roomCardItem {
-    text-align: center;
+    text-align: left;
     padding: 0;
     margin: 0;
     /* background-color: #6C74E1; */
-    --ion-background-color: #6C74E1;
 }
 
 .mapBtn {
-    --background: #898FE7;
+    --background: #F8963F;
+    margin-bottom: 10%;
+    margin-left: 5%;
+    margin-top: 5%;
 }
 
 .buttonsRow {
@@ -134,10 +144,71 @@ ion-content {
     margin-top: 10%;
     width: 90%;
     align-self: center;
+    --background: #F8963F;
+    color: #272727;
 }
 
-.imgOverlay {
+.avatar {
+    width: 50pt;
+    height: 50pt;
+    border-radius: 100pt;
+    bottom: 0;
+    z-index: 2;
+    margin-top: -12%;
+    margin-left: 38%;
+    position: relative;
+    border: 2px solid #6C74E1;
+}
+.container {
+    position: inherit;
+}
+.subtitle {
+    color: #f0ead6;
+}
 
-    background-color: #6C74E1;
+#descriptionTitle {
+    padding-left: 5%;   
+}
 
+#locationTitle {
+    padding-left: 5%;
+}
+
+#mainTitle {
+    font-size: xx-large;
+}
+
+#address {
+    color: #b9b9b9b7;
+    padding-left: 5%;
+    padding-top: 5%;
+    font-size: small;
+}
+
+.subRow {
+    text-align: left;
+}
+
+#rateBtn {
+
+    margin-bottom: 0;
+}
+
+.rateTextRow {
+
+    margin-top: 15%;
+    margin-left: 5%;
+}
+
+.rateText {
+    color: white;
+}
+
+.finishedRatingBtn {
+    --background: #f8963f;
+    color: #272727;
+}
+
+.isRatingCard {
+    background-color: white;
 }

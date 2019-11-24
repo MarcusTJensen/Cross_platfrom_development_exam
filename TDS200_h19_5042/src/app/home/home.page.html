@@ -1,20 +1,13 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content>
-    <ion-card *ngFor="let room of rooms$ | async" lines="none" (click)="goToDetailView(room.id)">
+  <ng-container *ngFor="let room of rooms$ | async">
+    <ion-card lines="none" (click)="goToDetailView(room.id)" *ngIf="room.isAvailable">
     <div *ngIf="room.isAvailable">
     <img [src]="room.imgUrl" />
-    <ion-card-header>
-      <h1 class="title">{{room.title}}</h1>
-    </ion-card-header>
     <ion-card-content>
-        <h3>Info: {{room.description}}</h3>
+        <h1 class="title">{{room.title}}</h1>
+        <h3 class="info">Info: {{room.description}}</h3>
       <ion-row class="row">
         <ion-col class="col">
           <h2 class="owner">By: {{room.owner}}</h2>
@@ -26,6 +19,7 @@
     </ion-card-content>
     </div>
   </ion-card>
+</ng-container>
 </ion-content>
 
 <app-tabbar></app-tabbar>

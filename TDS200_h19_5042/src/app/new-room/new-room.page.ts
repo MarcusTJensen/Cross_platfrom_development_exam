@@ -70,7 +70,7 @@ export class NewRoomPage implements OnInit {
     this.imgUrl = await this.addPicToFirebase();
     const data: RoomStruct = {title: this.title, owner: user, description: this.description, 
                               imgUrl: this.imgUrl, address: this.address, isAvailable: true, rId: "",
-                              ratings: [null]};
+                              ratings: [{}]};
     this.storageService.addToDataBaseRoom(data);
     console.log(data.title);
   }
