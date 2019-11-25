@@ -8,5 +8,6 @@ export default interface RoomStruct {
     isAvailable: boolean,
     ratings?: [any],
     floor: number,
-    capacity: number
+    capacity: number,
+    company: string
 }

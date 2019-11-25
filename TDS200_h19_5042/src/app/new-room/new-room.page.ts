@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { MapsAPILoader } from '@agm/core';
 import { Observable } from 'rxjs';
 import PlacesStruct from '../models/placesStruct';
+import { auth } from 'firebase';
 
 declare var google: any;
 
@@ -59,7 +60,6 @@ export class NewRoomPage implements OnInit {
     try {
       const imageData = await this.camera.getPicture();
       this.cameraPreview = imageData;
-      console.log(this.cameraPreview)
     } catch (e) {
       console.log(e);
     }
@@ -67,13 +67,17 @@ export class NewRoomPage implements OnInit {
 
   async addRoom() {
     const user = this.authService.getUser();
-    console.log(user);
+    const uid =  this.authService.isLoggedIn().uid;
     this.imgUrl = await this.addPicToFirebase();
-    const data: RoomStruct = {title: this.title, owner: user, description: this.description, 
+    let userDb = this.storageService.retrieveFromDataBaseUser(uid);
+    var company;
+    userDb.subscribe((u) => {
+      company = u.company;
+      const data: RoomStruct = {title: this.title, owner: user, description: this.description, 
                               imgUrl: this.imgUrl, address: this.address, isAvailable: true, rId: "",
-                              ratings: [null], floor: this.floor, capacity: this.capacity};
-    this.storageService.addToDataBaseRoom(data);
-    console.log(data.title);
+                              ratings: [null], floor: this.floor, capacity: this.capacity, company: company};
+      this.storageService.addToDataBaseRoom(data);
+    });
   }
 
   async addPicToFirebase() {
