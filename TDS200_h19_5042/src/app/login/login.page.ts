@@ -15,7 +15,6 @@ export class LoginPage implements OnInit {
   constructor(private authService: AuthorizationService, private router: Router) { }
 
   ngOnInit() {
-    console.log("zup bitch");
   }
 
   async loginUser() {

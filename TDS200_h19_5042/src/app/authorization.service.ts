@@ -6,6 +6,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class AuthorizationService {
 
+/*Service that handles everything Authorization. Makes it a lot easier to reuse the functions throughout the app.
+  Helps with writing less code overall*/
   constructor(private fireAuth: AngularFireAuth) { }
 
   async loginUser({username, password}) {

@@ -32,7 +32,6 @@ export class HomePage {
   }
 
   async goToDetailView(id: string) {
-    console.log(id);
     this.router.navigate(["room-detail-view/" + id]);
   }
 }

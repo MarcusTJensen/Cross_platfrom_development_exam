@@ -27,14 +27,19 @@ export class RegisterPage implements OnInit {
     return user
   }
 
+  /*Creates a new User object, with username, password and company inputs form the HTML,
+    and adds it to firestore*/
     async addUserToDb() {
     let createdUser = await this.register();
     this.authService.loginUser({username: this.username, password: this.password});
-    //let aRoom: RoomStruct = {title: "ja", description: "okokokok", imgUrl: "nei", owner: "me", address: "to da left", isAvailable: false, rId: ""};
     let data: userStruct = {email: this.username, company: this.company, bookings: [null]};
     let uid = this.authService.isLoggedIn().uid;
     this.storageService.addToDatabaseUser(data, uid);
     this.router.navigate(['profile']);
+  }
+
+  navigateToLogin() {
+    this.router.navigate(["login"]);
   }
 
 }

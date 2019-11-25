@@ -10,6 +10,9 @@ import userStruct from './models/userStruct';
 })
 export class StorageService {
 
+  /*Service made to handle everything related to storage. Retrieving, updating and deleting functions are all 
+    placed here.*/
+
   constructor(private firestore: AngularFirestore) { }
 
   addToDataBaseRoom(newRoom: RoomStruct) {
@@ -21,7 +24,7 @@ export class StorageService {
     db.doc(uid).set(newUser);
     
   }
-
+  
   retrieveFromDataBaseRoom(roomId: string) {
     const room = this.firestore.collection("rooms").doc(roomId);
     const roomParsed = room.valueChanges() as Observable<RoomStruct>;
@@ -48,7 +51,6 @@ export class StorageService {
 
   updateDatabaseRoom(roomId: string, updatedRoom: RoomStruct) {
     const room = this.firestore.collection('rooms').doc(roomId);
-    //console.log(updatedRoom.address);
     room.update(updatedRoom);
   }
 

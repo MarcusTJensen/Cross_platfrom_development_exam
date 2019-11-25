@@ -6,5 +6,7 @@ export default interface RoomStruct {
     imgUrl: string,
     address: string,
     isAvailable: boolean,
-    ratings?: [any]
+    ratings?: [any],
+    floor: number,
+    capacity: number
 }

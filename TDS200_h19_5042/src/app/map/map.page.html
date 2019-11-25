@@ -1,17 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>map</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button class="backButton"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <!--This is inspired by: https://dev.to/devpato/setup-google-maps-with-agm-in-angular-app-33em-->
   <agm-map
-   [latitude]="lat"
-   [longitude]="lng"
+   [latitude]="destination.lat"
+   [longitude]="destination.lng"
    class="map">
-   <agm-direction [origin]="origin" [destination]="destination">
+   <agm-marker [latitude]="destination.lat" [longitude]="destination.lng" *ngIf="!directions"></agm-marker>
+   <agm-direction [origin]="origin" [destination]="destination" *ngIf = "directions">
     </agm-direction>
-    </agm-map>
+  </agm-map>
+  <ion-button class="directionsBtn" (click)="getDirections()" *ngIf="!directions"><ion-icon name="navigate"></ion-icon></ion-button>
+  <ion-button class="directionsBtn" (click)="closeDirections()" *ngIf="directions"><ion-icon name="close"></ion-icon></ion-button>
 </ion-content>
 
 <app-tabbar></app-tabbar>

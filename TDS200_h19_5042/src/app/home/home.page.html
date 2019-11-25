@@ -7,10 +7,11 @@
     <img [src]="room.imgUrl" />
     <ion-card-content>
         <h1 class="title">{{room.title}}</h1>
-        <h3 class="info">Info: {{room.description}}</h3>
+        <h2 class="address">Location</h2>
+        <h3 class="info">{{room.address}}</h3>
       <ion-row class="row">
         <ion-col class="col">
-          <h2 class="owner">By: {{room.owner}}</h2>
+          <h2 class="owner">{{room.company}}</h2>
         </ion-col>
         <ion-col class="col">
           <img class="avatar" src="https://api.adorable.io/avatars/285/abott@adorable.png" />
@@ -23,17 +24,3 @@
 </ion-content>
 
 <app-tabbar></app-tabbar>
-
-<!--<ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="home">
-        <ion-icon name="home" routerLink="/"></ion-icon>
-      </ion-tab-button>
-      <ion-tab-button>
-        <ion-icon name="add"></ion-icon>
-      </ion-tab-button>
-      <ion-tab-button tab="login">
-        <ion-icon name="person"></ion-icon>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>-->

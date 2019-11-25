@@ -35,6 +35,12 @@
 <ion-row class="subRow">
     <ion-label class="detailViewCardLabel"> {{description}}</ion-label>
 </ion-row>
+<ion-row class="subRow">
+    <ion-label class="detailViewCardLabel"> Floor: {{floor}}</ion-label>
+</ion-row>
+<ion-row class="subRow">
+    <ion-label class="detailViewCardLabel">Capacity: {{capacity}}</ion-label>
+</ion-row>
 <ion-button (click)="bookRoom()" shape="round" *ngIf="isAvailable; else unavailable" class="bookingButton">Book Room</ion-button>
 <ng-template #unavailable>
   <ion-button (click)="unBookRoom()" shape="round" class="bookingButton">Unbook room</ion-button>
@@ -48,6 +54,7 @@
     </ion-row>
   <ion-card *ngIf="isRating" class="isRatingCard">
     <ion-card-content>
+      <!--Inspired by: https://www.npmjs.com/package/ionic4-rating-->
         <rating [(ngModel)]="rate"
           readonly="false"
           size="default" 
@@ -58,11 +65,9 @@
     </ion-card-content>
   </ion-card>
 </ng-template>
-<div *ngIf="ratingExists">
-<ion-row *ngFor="let rating of ratings" class="ratingRow">
-      <!--<ion-label>{{rating.rating}}</ion-label>
-      <ion-label>{{rating.comment}}</ion-label>-->
-  <ion-card class="ratingCard">
+<ng-container *ngFor="let rating of ratings">
+<ion-row class="ratingRow">
+  <ion-card class="ratingCard" *ngIf="rating.comment">
     <ion-card-content class="contentNoPaddingLeft">
       <ion-item lines="none" class="starsItem">
         <ion-icon name="star" *ngFor="let i of Arr(rating.rating).fill(1)" class="ratingStars"></ion-icon>
@@ -74,7 +79,7 @@
     </ion-card-content>
   </ion-card>
 </ion-row>
-</div>
+</ng-container>
 </ion-content>
 
 <app-tabbar></app-tabbar>

@@ -32,12 +32,14 @@ export class NewRoomPage implements OnInit {
   inputText: boolean;
   searchText: string;
   searchResult$: Observable<PlacesStruct[]>;
+  floor: number;
+  capacity: number;
   private autoComplete;
   constructor(private camera: Camera, private geolocation: Geolocation, 
               private storageService: StorageService, private authService: AuthorizationService,
               private fireStorage: AngularFireStorage, private alertController: AlertController,
               private router: Router, private mapsApiLoader: MapsAPILoader) { 
-
+                //This is inspired by: https://stackoverflow.com/questions/51759264/angular-6-agm-selects-first-address-in-google-autocomplete
                 mapsApiLoader.load().then(() => {
                   this.autoComplete = new google.maps.places.AutocompleteService();
                 })
@@ -51,9 +53,8 @@ export class NewRoomPage implements OnInit {
     if (!user) {
       this.presentLoginPrompt();
     }
-    //this.inputText = true;
   }
-
+  //this is inspired by: https://ionicframework.com/docs/native/camera/
   async takePicWithCamera(){
     try {
       const imageData = await this.camera.getPicture();
@@ -70,20 +71,20 @@ export class NewRoomPage implements OnInit {
     this.imgUrl = await this.addPicToFirebase();
     const data: RoomStruct = {title: this.title, owner: user, description: this.description, 
                               imgUrl: this.imgUrl, address: this.address, isAvailable: true, rId: "",
-                              ratings: [{}]};
+                              ratings: [null], floor: this.floor, capacity: this.capacity};
     this.storageService.addToDataBaseRoom(data);
     console.log(data.title);
   }
 
   async addPicToFirebase() {
-    const fileName = `tds200-${uuid()}.png`;
-    //const filenName = `tds200-${randNum}.png`;
+    const fileName = `tds200exam-${uuid()}.png`;
     const firestorageFileRef = this.fireStorage.ref(fileName);
     const uploadTask = firestorageFileRef.putString(this.cameraPreview, 'base64', { contentType: 'image/png' });
     await uploadTask.then();
     return firestorageFileRef.getDownloadURL().toPromise();
   }
-
+/*Alert that is displayed if a user tries to access this page without being logged in.
+  Inspired by: https://ionicframework.com/docs/api/alert*/
   async presentLoginPrompt() {
     let alert = this.alertController.create({
       message: "You're not logged in",
@@ -125,22 +126,8 @@ export class NewRoomPage implements OnInit {
     return (await alert).present();
   }
 
-  /*async onInputChange() {
-    let placesSearch =
-    await fetch(
-      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${this.address}&types=geocode&key=AIzaSyD03B7fr-Lz0Cs_IqgpWBYe4aivxqImpss`,
-      {mode: 'no-cors'}
-      );
-      "https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&"
-
-      var service = new google.maps.places.PlacesService();
-
-      service.findplacefromtext
-      let resultParsed = placesSearch.json();
-
-      console.log(resultParsed);
-  }*/
-
+  /*Function that handles google places autocomplete. Sends the request and displays the data
+   Some of this is inspired by https://stackoverflow.com/questions/51759264/angular-6-agm-selects-first-address-in-google-autocomplete*/
   async onInputChange() {
     if(this.searchText.length) {
       this.inputText = true;

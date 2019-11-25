@@ -1,20 +1,29 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>newRoom</ion-title>
+    <ion-title class="headerTitle">newRoom</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <img [src]="cameraPreview" />
-  <ion-button class="button-round" (click)="takePicWithCamera()"> <ion-icon name="camera"></ion-icon></ion-button>
-  <ion-item>
+    <img *ngIf="cameraPreview" src="{{'data:image/jpeg;base64,' + cameraPreview}}" class="roomImg" />
+    <br>
+    <ion-row lines="none">
+  <ion-button shape="round" class="cameraBtn" (click)="takePicWithCamera()"> <ion-icon name="camera"></ion-icon></ion-button>
+</ion-row>
+  <ion-item class="newRoomInputItem" id="inputTitle">
     <ion-input [(ngModel)]="title" placeholder="title"></ion-input>
   </ion-item>
-  <ion-item>
+  <ion-item class="newRoomInputItem">
+    <ion-input [(ngModel)]="floor" placeholder="floor"></ion-input>
+  </ion-item>
+  <ion-item class="newRoomInputItem">
+    <ion-input [(ngModel)]="capacity" placeholder="capacity"></ion-input>
+  </ion-item>
+  <ion-item class="newRoomInputItem">
     <ion-input [(ngModel)]="description" placeholder="Information"></ion-input>
   </ion-item>
-  <ion-searchbar placeholder="address" [(ngModel)]="searchText" (ionChange)="onInputChange()"></ion-searchbar>
+  <ion-searchbar placeholder="address" [(ngModel)]="searchText" (ionChange)="onInputChange()" class="searchbar"></ion-searchbar>
   <ion-card *ngIf="inputText">
     <ion-card-content>
       <ion-item *ngFor="let address of searchResult$" (click)="setAddress(address.description)">
@@ -27,8 +36,7 @@
   <ion-item *ngIf="addressRegistered">
     <ion-label>{{address}}</ion-label>
   </ion-item>
-  <ion-button class="button-full" (click)="addRoom()" routerLink="/"> Add new room </ion-button>
-  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyD2Dd26BWw91XcQBGDpspbETjGB6cc0qE8"></script>
+  <ion-button (click)="addRoom()" routerLink="/" class="addRoomBtn"> Add new room </ion-button>
 </ion-content>
 
 <app-tabbar></app-tabbar>

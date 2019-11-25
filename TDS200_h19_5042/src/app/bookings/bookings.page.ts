@@ -22,18 +22,15 @@ export class BookingsPage implements OnInit {
 
     let db = this.storageService.getUserData();
     let users = db.valueChanges() as Observable<userStruct[]>;
-    //this.myBookings$ = userData as Observable<RoomStruct[]>;
     let userData = this.storageService.retrieveFromDataBaseUser(userId);
 
     userData.subscribe((u) => {
       this.myBookings$ = u.bookings as unknown as Observable<RoomStruct[]>;
-      console.log(u.bookings);
       return(this.myBookings$);
     })
   }
 
   goToDetailView(rId: string) {
-    console.log(rId);
     this.router.navigate(["room-detail-view/" + rId]);
   }
 

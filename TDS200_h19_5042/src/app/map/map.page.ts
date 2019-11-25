@@ -17,27 +17,25 @@ export class MapPage implements OnInit {
   height = 0;
   private address: string;
   private rId: string;
+  private directions = false;
 
   constructor(public platform: Platform, public route: ActivatedRoute, private storageService: StorageService,
     private geolocation: Geolocation) {
-    console.log(platform.height());
     this.height = platform.height() - 56;
     this.lat = 61.248333;
     this.lng = 8.804821;
   }
 
   ngOnInit() {
+    /*uses room id (rId), which is passed from the former page to access the database to retrieve the address
+      of the active room*/
     this.route.params.subscribe((parameters) => { 
       this.rId = parameters["rId"];
-      console.log(parameters);
-      console.log(this.rId);
     });
     const db = this.storageService.retrieveFromDataBaseRoom(this.rId);
     db.subscribe((room) => {
       this.address = room.address;
-      console.log(this.address);
     });
-    console.log(this.address);
 
     if(this.address != "") {
       this.getLatLng();
@@ -45,30 +43,36 @@ export class MapPage implements OnInit {
 
   }
 
+  /*Function that requests geocode of address of the room. Gets current location of user aswell
+    Creates a origin and a destination object with latitude and longitude, which are used in the map for displaying
+    directions and markers.*/
   async getLatLng() {
-    console.log(this.address);
     const db = this.storageService.retrieveFromDataBaseRoom(this.rId);
       db.subscribe(async (room) => {
       this.address = room.address;
-      console.log(this.address);
+      //Inspired by: https://developers.google.com/maps/documentation/geocoding/intro
       let geocodeResponse = fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${this.address}&key=AIzaSyD03B7fr-Lz0Cs_IqgpWBYe4aivxqImpss`
         );
   
       let responseJson = (await geocodeResponse).json();
-      console.log(responseJson);
-  
+      //This is inspired by: https://ionicframework.com/docs/native/geolocation
       this.geolocation.getCurrentPosition().then((res) => {
         this.origin = {lat: res.coords.latitude, lng: res.coords.longitude};
-        console.log(this.origin);
       });
       responseJson.then((r) => {
         const latDestination = r.results[0].geometry.location.lat;
         const lngDestination = r.results[0].geometry.location.lng;
         this.destination = {lat: latDestination, lng: lngDestination};
-        console.log(`YAYAYAYAYAYYAYAYAYA${this.lat}, ${this.lng}`);
       })
     });
   }
 
+  getDirections() {
+    this.directions = true;
+  }
+
+  closeDirections() {
+    this.directions = false;
+  }
 }

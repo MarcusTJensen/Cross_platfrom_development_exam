@@ -1,20 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title class="headerTitle">login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
     <ion-card-content>
-      <ion-input value="text" placeholder="username" [(ngModel)]="username"></ion-input>
-      <ion-input value="password" placeholder="password" [(ngModel)]="password"></ion-input>
+      <ion-input type="text" placeholder="username" [(ngModel)]="username" class="loginInput"></ion-input>
+      <ion-input type="password" placeholder="password" [(ngModel)]="password" class="loginInput"></ion-input>
       <ion-row>
         <ion-col>
-          <ion-button (click)="loginUser()">Login</ion-button>
+          <ion-button (click)="loginUser()" class="loginPageBtn">Login</ion-button>
         </ion-col>
         <ion-col>
-          <ion-button (click)="registerUser()">Register</ion-button>
+          <ion-button (click)="registerUser()" class="loginPageBtn">Register</ion-button>
         </ion-col>
       </ion-row>
     </ion-card-content>

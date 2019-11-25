@@ -2,20 +2,13 @@
     width: 50pt;
     height: 50pt;
     border-radius: 100pt;
-    margin-left: 34%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:  20%;
 }
 
-.profileCard {
-    margin-top: 15%;
-    width: 80%;
-    height: 70%;
-    align-content: center;
-    padding-top: 5%;
-    margin-left: 10%;
-    border-radius: 10%;
-    text-align: center;
-    border: 2px solid grey;
-    //padding-bottom: 10%;
+ion-content {
+    --background: #272727;
 }
 
 #editProfile {
@@ -24,8 +17,13 @@
 
 #logout {
     margin-top: 15%;
+    --background: #f8963f;
+    width: 100%;
 }
 
 .owner {
-    margin-top: 15%;
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
 }
