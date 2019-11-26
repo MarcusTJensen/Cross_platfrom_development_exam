@@ -31,6 +31,7 @@ export class RoomDetailViewPage implements OnInit {
   isAvailable: boolean;
   isRating: boolean;
   private ratings;
+  private bookings;
   actualRatings$ = [];
   floor: number;
   capacity: number;
@@ -67,6 +68,11 @@ export class RoomDetailViewPage implements OnInit {
     const user = this.storageService.retrieveFromDataBaseUser(this.uid);
     user.subscribe((u) => {
       this.activeUser = u;
+      let filteredBookings = u.bookings.filter((filtered) => {
+        return filtered != null;
+      })
+      this.bookings = filteredBookings
+      this.activeUser.bookings = this.bookings;
     });
 
   }
